@@ -27,20 +27,20 @@ class VideoScreenState extends State<VideoScreen> {
       setState(() {});
     });
 
-    // _videoViewController2 = new VlcPlayerController(onInit: () {
-    //   _videoViewController2.play();
-    // });
-    // _videoViewController2.addListener(() {
-    //   setState(() {});
-    // });
+    _videoViewController2 = new VlcPlayerController(onInit: () {
+      _videoViewController2.play();
+    });
+    _videoViewController2.addListener(() {
+      setState(() {});
+    });
 
     Timer.periodic(Duration(seconds: 1), (Timer timer) {
       String state = _videoViewController2.playingState.toString();
       if (this.mounted) {
         setState(() {
           if (state == "PlayingState.PLAYING" &&
-              sliderValue < _videoViewController.duration.inSeconds) {
-            sliderValue = _videoViewController.position.inSeconds.toDouble();
+              sliderValue < _videoViewController2.duration.inSeconds) {
+            sliderValue = _videoViewController2.position.inSeconds.toDouble();
           }
         });
       }
@@ -53,7 +53,7 @@ class VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: const Text('Live Video Stream'),
+        title: const Text('Plugin example app'),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera),
@@ -79,29 +79,29 @@ class VideoScreenState extends State<VideoScreen> {
                 ),
               ),
             ),
-            // SizedBox(
-            //   height: 360,
-            //   child: new VlcPlayer(
-            //     aspectRatio: 16 / 9,
-            //     url:
-            //         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-            //     controller: _videoViewController2,
-            //     placeholder: Container(
-            //       height: 250.0,
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: <Widget>[CircularProgressIndicator()],
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            SizedBox(
+              height: 360,
+              child: new VlcPlayer(
+                aspectRatio: 16 / 9,
+                url:
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                controller: _videoViewController2,
+                placeholder: Container(
+                  height: 250.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[CircularProgressIndicator()],
+                  ),
+                ),
+              ),
+            ),
             Slider(
               activeColor: Colors.white,
               value: sliderValue,
               min: 0.0,
-              max: _videoViewController.duration == null
+              max: _videoViewController2.duration == null
                   ? 1.0
-                  : _videoViewController.duration.inSeconds.toDouble(),
+                  : _videoViewController2.duration.inSeconds.toDouble(),
               onChanged: (progress) {
                 setState(() {
                   sliderValue = progress.floor().toDouble();
@@ -113,20 +113,20 @@ class VideoScreenState extends State<VideoScreen> {
             FlatButton(
                 child: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
                 onPressed: () => {playOrPauseVideo()}),
-            // FlatButton(
-            //   child: Text("Change URL"),
-            //   onPressed: () => _videoViewController.setStreamUrl(
-            //       "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_2160p_60fps_normal.mp4"),
-            // ),
-            // FlatButton(
-            //     child: Text("+speed"),
-            //     onPressed: () => _videoViewController.setPlaybackSpeed(2.0)),
-            // FlatButton(
-            //     child: Text("Normal"),
-            //     onPressed: () => _videoViewController.setPlaybackSpeed(1)),
-            // FlatButton(
-            //     child: Text("-speed"),
-            //     onPressed: () => _videoViewController.setPlaybackSpeed(0.5)),
+            FlatButton(
+              child: Text("Change URL"),
+              onPressed: () => _videoViewController.setStreamUrl(
+                  "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_2160p_60fps_normal.mp4"),
+            ),
+            FlatButton(
+                child: Text("+speed"),
+                onPressed: () => _videoViewController.setPlaybackSpeed(2.0)),
+            FlatButton(
+                child: Text("Normal"),
+                onPressed: () => _videoViewController.setPlaybackSpeed(1)),
+            FlatButton(
+                child: Text("-speed"),
+                onPressed: () => _videoViewController.setPlaybackSpeed(0.5)),
             Text("position=" +
                 _videoViewController.position.inSeconds.toString() +
                 ", duration=" +
@@ -147,15 +147,15 @@ class VideoScreenState extends State<VideoScreen> {
   }
 
   void playOrPauseVideo() {
-    String state = _videoViewController.playingState.toString();
+    String state = _videoViewController2.playingState.toString();
 
     if (state == "PlayingState.PLAYING") {
-      _videoViewController.pause();
+      _videoViewController2.pause();
       setState(() {
         isPlaying = false;
       });
     } else {
-      _videoViewController.play();
+      _videoViewController2.play();
       setState(() {
         isPlaying = true;
       });
