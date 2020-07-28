@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "842686985465",
+    "firebase_url": "https://emergencyrelief-641a0.firebaseio.com",
+    "project_id": "emergencyrelief-641a0",
+    "storage_bucket": "emergencyrelief-641a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842686985465:android:796571d7bdac5137819e28",
+        "android_client_info": {
+          "package_name": "com.example.emergency_relief"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842686985465-k0hbkbsva3m29rj6g9hgc5aa4bb2vlp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADbJDlnilcL6linx1d9K-JzvU2fD0qTsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842686985465-k0hbkbsva3m29rj6g9hgc5aa4bb2vlp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
